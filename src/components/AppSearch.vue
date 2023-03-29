@@ -19,13 +19,13 @@ export default {
 
 <style lang="scss" scoped>
 @use '../styles/partials/variables';
+@use '../styles/partials/mixins';
 
 .ms_container {
-    width: 1170px;
-    margin: auto;
-}
+    @include mixins.contenitore;
 
-.select-size {
-    width: 200px;
+    .select-size {
+        width: 200px;
+    }
 }
 </style>

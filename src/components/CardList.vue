@@ -20,7 +20,7 @@ export default {
     <section id="content" class="ms_container">
         <div class="bg-white p-5">
             <div class="counter col-12">
-                <h4>{{ 'Found ' + store.length + ' cards' }}</h4>
+                <h4>{{ 'Found ' + store.cardList.length + ' cards' }}</h4>
             </div>
             <div class="ms_display">
                 <div class="ms_card" v-for="(card, index) in store.cardList">
@@ -33,10 +33,10 @@ export default {
 
 <style lang="scss" scoped>
 @use '../styles/partials/variables';
+@use '../styles/partials/mixins';
 
 .ms_container {
-    width: 1170px;
-    margin: auto;
+    @include mixins.contenitore;
     background-color: variables.$color-white;
 
     .counter {

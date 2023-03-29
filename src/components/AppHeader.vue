@@ -13,6 +13,7 @@ export default {
 
 <style lang="scss" scoped>
 @use '../styles/partials/variables';
+@use '../styles/partials/mixins';
 
 header {
     background-color: variables.$color-white;

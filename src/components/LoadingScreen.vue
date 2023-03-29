@@ -19,6 +19,7 @@ export default {
 
 <style lang="scss" scoped>
 @use '../styles/partials/variables';
+@use '../styles/partials/mixins';
 
 .loading {
     background-color: variables.$bg-color;
@@ -27,8 +28,6 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include mixins.d-flex-center;
 }
 </style>
