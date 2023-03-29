@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     getCards() {
-      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php')
+      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=Alien')
         .then(response => {
           this.store.cardList = response.data.data;
           this.store.loading = false;
