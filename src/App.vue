@@ -5,7 +5,7 @@
   </header>
 
   <main>
-    <AppSearch @doChange="getCards" />
+    <AppSearch @doChange="getSelectedArchetypeCard" />
     <ResultMessage />
     <CardList />
   </main>
@@ -37,32 +37,7 @@ export default {
   },
   methods: {
     getCards() {
-      console.log(store.search);
-
-      let urlApi = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?num=1000&offset=0';
-
-      switch (store.search) {
-        case '1':
-          urlApi += `&archetype=Alien`;
-          break;
-        case '2':
-          urlApi += `&archetype=Umi`;
-          break;
-        case '3':
-          urlApi += `&archetype=Melodious`;
-          break;
-        case '4':
-          urlApi += `&archetype=ABC`;
-          break;
-        case '5':
-          urlApi += `&archetype=Rokket`;
-          break;
-        case '6':
-          urlApi += `&archetype=Mermail`;
-          break;
-      }
-
-      axios.get(urlApi)
+      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=1000&offset=0')
         .then(response => {
           this.store.cardList = response.data.data;
           this.store.loading = false;
@@ -73,10 +48,31 @@ export default {
           this.store.loading = false;
           console.log('La ricerca non ha dato risultati');
         })
+    },
+    getAllArchetype() {
+      axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
+        .then(response => {
+          this.store.allArchetype = response.data;
+        })
+    },
+    getSelectedArchetypeCard() {
+      if (store.search == '') {
+        this.getCards();
+      } else {
+        let urlApi = 'https://db.ygoprodeck.com/api/v7/cardinfo.php';
+
+        urlApi += `?archetype=${this.store.search}`;
+
+        axios.get(urlApi)
+          .then(response => {
+            this.store.cardList = response.data.data;
+          })
+      }
     }
   },
   created() {
     this.getCards();
+    this.getAllArchetype();
   }
 
 }

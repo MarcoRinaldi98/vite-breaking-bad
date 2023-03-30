@@ -14,14 +14,11 @@ export default {
 <template>
     <div class="py-5 ps-1 ms_container">
         <div class="select-size">
-            <select class="form-select" v-model="store.search" @change="$emit('doChange')">ù
-                <option selected>All</option>
-                <option value="1">Alien</option>
-                <option value="2">Umi</option>
-                <option value="3">Melodious</option>
-                <option value="4">ABC</option>
-                <option value="5">Rokket</option>
-                <option value="6">Mermail</option>
+            <select class="form-select" v-model="store.search" @change="$emit('doChange')">
+                <option value="" selected>All</option>
+                <option v-for="(type, i) in store.allArchetype" :value="type.archetype_name" :key="i">{{ type.archetype_name
+                }}
+                </option>
             </select>
         </div>
     </div>
