@@ -5,7 +5,7 @@
   </header>
 
   <main>
-    <AppSearch />
+    <AppSearch @doChange="getCards" />
     <CardList />
   </main>
 </template>
@@ -34,11 +34,42 @@ export default {
   },
   methods: {
     getCards() {
-      axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=Alien')
+      console.log(store.search);
+
+      let urlApi = 'https://db.ygoprodeck.com/api/v7/cardinfo.php?num=1000&offset=0';
+
+      switch (store.search) {
+        case '1':
+          urlApi += `&archetype=Alien`;
+          break;
+        case '2':
+          urlApi += `&archetype=Umi`;
+          break;
+        case '3':
+          urlApi += `&archetype=Melodious`;
+          break;
+        case '4':
+          urlApi += `&archetype=ABC`;
+          break;
+        case '5':
+          urlApi += `&archetype=Rokket`;
+          break;
+        case '6':
+          urlApi += `&archetype=Mermail`;
+          break;
+      }
+
+      axios.get(urlApi)
         .then(response => {
           this.store.cardList = response.data.data;
           this.store.loading = false;
-        });
+        })
+        .catch(err => {
+          console.log(err.message);
+          this.store.cardList = [];
+          this.store.loading = false;
+          console.log('La ricerca non ha dato risultati');
+        })
     }
   },
   created() {

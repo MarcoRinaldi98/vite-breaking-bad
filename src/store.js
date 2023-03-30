@@ -3,6 +3,7 @@ import { reactive } from 'vue';
 export const store = reactive(
     {
         cardList: [],
-        loading: true
+        loading: true,
+        search: 'All',
     }
 )
