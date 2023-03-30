@@ -6,6 +6,7 @@
 
   <main>
     <AppSearch @doChange="getCards" />
+    <ResultMessage />
     <CardList />
   </main>
 </template>
@@ -19,13 +20,15 @@ import AppHeader from './components/AppHeader.vue';
 import AppSearch from './components/AppSearch.vue';
 import CardList from './components/CardList.vue';
 import LoadingScreen from './components/LoadingScreen.vue';
+import ResultMessage from './components/ResultMessage.vue';
 
 export default {
   components: {
     AppHeader,
     AppSearch,
     CardList,
-    LoadingScreen
+    LoadingScreen,
+    ResultMessage
   },
   data() {
     return {
